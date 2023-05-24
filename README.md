@@ -4,7 +4,7 @@
 
 ```go
 
-logging.New(true, "Jie")   
+logging.New(true, "", "Jie")   
 logging.Logger.Infoln("test")
 logging.Logger.Debugln("debug")
 

@@ -14,7 +14,7 @@ var fileFormatter *TextFormatter // 文件输出格式
 
 var Logger *logrus.Logger
 
-func New(debug bool, logFileName string) {
+func New(debug bool, logPath string, logFileName string) {
 	Logger = logrus.New()
 	Logger.SetReportCaller(true)
 	stdFormatter = &TextFormatter{
@@ -40,8 +40,10 @@ func New(debug bool, logFileName string) {
 	} else {
 		Logger.SetLevel(logrus.InfoLevel)
 	}
+	if logPath == "" {
+		logPath, _ = os.Getwd()
+	}
 
-	logPath, _ := os.Getwd()
 	logName := fmt.Sprintf("%s/logs/%s_", logPath, logFileName)
 	writer, _ := rotatelogs.New(logName + "%Y_%m_%d" + ".log")
 	lfHook := lfshook.NewHook(lfshook.WriterMap{
