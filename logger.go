@@ -14,7 +14,7 @@ var fileFormatter *TextFormatter // 文件输出格式
 
 var Logger *logrus.Logger
 
-func New(debug bool, logPath string, logFileName string) {
+func New(debug bool, logPath string, logFileName string, screenReport bool) {
 	Logger = logrus.New()
 	Logger.SetReportCaller(true)
 	stdFormatter = &TextFormatter{
@@ -23,7 +23,7 @@ func New(debug bool, logPath string, logFileName string) {
 		ForceFormatting: true,
 		ForceColors:     true,
 		DisableColors:   false,
-		ReportCaller:    true,
+		ReportCaller:    screenReport,
 	}
 	fileFormatter = &TextFormatter{
 		FullTimestamp:   true,

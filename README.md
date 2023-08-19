@@ -4,7 +4,9 @@
 
 ```go
 
-logging.New(true, "", "Jie")   
+
+// screenReport 屏幕是否输出路径信息
+logging.New(true, "", "Jie", false)
 logging.Logger.Infoln("test")
 logging.Logger.Debugln("debug")
 
