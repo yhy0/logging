@@ -14,9 +14,9 @@ var fileFormatter *TextFormatter // 文件输出格式
 
 var Logger *logrus.Logger
 
-func New(debug bool, logPath string, logFileName string, screenReport bool) {
-	Logger = logrus.New()
-	Logger.SetReportCaller(true)
+func New(debug bool, logPath string, logFileName string, screenReport bool) *logrus.Logger {
+	log := logrus.New()
+	log.SetReportCaller(true)
 	stdFormatter = &TextFormatter{
 		FullTimestamp:   true,
 		TimestampFormat: "2006-01-02 15:04:05",
@@ -34,11 +34,11 @@ func New(debug bool, logPath string, logFileName string, screenReport bool) {
 		ReportCaller:    true,
 	}
 
-	Logger.SetFormatter(stdFormatter)
+	log.SetFormatter(stdFormatter)
 	if debug {
-		Logger.SetLevel(logrus.DebugLevel)
+		log.SetLevel(logrus.DebugLevel)
 	} else {
-		Logger.SetLevel(logrus.InfoLevel)
+		log.SetLevel(logrus.InfoLevel)
 	}
 	if logPath == "" {
 		logPath, _ = os.Getwd()
@@ -52,6 +52,7 @@ func New(debug bool, logPath string, logFileName string, screenReport bool) {
 		logrus.DebugLevel: writer,
 		logrus.ErrorLevel: writer,
 	}, fileFormatter)
-	Logger.SetOutput(os.Stdout)
-	Logger.AddHook(lfHook)
+	log.SetOutput(os.Stdout)
+	log.AddHook(lfHook)
+	return log
 }
