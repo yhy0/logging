@@ -11,7 +11,7 @@ import (
 **/
 
 func TestLog(t *testing.T) {
-	New(true, "", "Jie", false)
+	Logger = New(true, "", "Jie", false)
 	Logger.Debug("fsafs")
 	Logger.Infoln("===")
 }
